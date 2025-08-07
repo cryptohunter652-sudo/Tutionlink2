@@ -1,39 +1,47 @@
 import 'package:flutter/material.dart';
-import 'post_tuition_screen.dart';
-import 'tuition_list_screen.dart';
+import '../models/tuition.dart';
+import '../providers/tuition_provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  final TuitionProvider provider;
+
+  HomeScreen({required this.provider});
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final titleController = TextEditingController();
+  final descController = TextEditingController();
+
+  void _submit() {
+    final title = titleController.text;
+    final description = descController.text;
+
+    if (title.isEmpty || description.isEmpty) return;
+
+    widget.provider.addTuition(Tuition(title: title, description: description));
+    titleController.clear();
+    descController.clear();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Tuition posted!")),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tuition Finder'),
-      ),
-      body: Center(
+      appBar: AppBar(title: Text('Post Tuition')),
+      body: Padding(
+        padding: EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton.icon(
-              icon: Icon(Icons.post_add),
-              label: Text('Post Tuition'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => PostTuitionScreen()),
-                );
-              },
-            ),
-            SizedBox(height: 20),
-            ElevatedButton.icon(
-              icon: Icon(Icons.list),
-              label: Text('View Tuitions'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => TuitionListScreen()),
-                );
-              },
-            ),
+            TextField(controller: titleController, decoration: InputDecoration(labelText: 'Title')),
+            TextField(controller: descController, decoration: InputDecoration(labelText: 'Description')),
+            SizedBox(height: 10),
+            ElevatedButton(onPressed: _submit, child: Text('Submit')),
           ],
         ),
       ),
