@@ -1,14 +1,17 @@
 name: tuition_finder
-description: A simple Tuition Finder app for students and teachers.
+description: A simple app where users post tuition ads and teachers can apply.
+publish_to: "none"
+
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=2.19.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.6
+  flutter_riverpod: ^2.4.0
 
 dev_dependencies:
   flutter_test:
