@@ -1,8 +1,8 @@
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '1.7.10'
+
     repositories {
-        google()
-        mavenCentral()
+        // Keep this block empty if using RepositoriesMode.PREFER_SETTINGS in settings.gradle
     }
 
     dependencies {
@@ -12,8 +12,5 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+    // No repositories here; handled by settings.gradle
 }
