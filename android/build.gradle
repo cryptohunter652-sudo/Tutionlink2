@@ -1,16 +1,21 @@
 buildscript {
-    ext.kotlin_version = '1.7.10'
-
     repositories {
-        // Keep this block empty if using RepositoriesMode.PREFER_SETTINGS in settings.gradle
+        google()
+        mavenCentral()
     }
-
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
     }
 }
 
 allprojects {
-    // No repositories here; handled by settings.gradle
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
